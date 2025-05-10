@@ -1,0 +1,40 @@
+<section>
+    <h1>Beer List</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let beer of beers">
+                <td>
+                    <img class="img-thumbnail" [src]="beer.image" [alt]="beer.name" width="120" />
+                </td>
+                <td>{{ beer.name }}
+                    <span *ngIf="beer.deal" class="badge sale-tag">SALE</span>
+                </td>
+                <td>{{ beer.type }}</td>
+                <td *ngIf="beer.deal">
+                    <span class="old-price">{{beer.price | currency}}</span>
+                    <span class="new-price">{{(beer.price * 0.8) | currency}}</span>
+                </td>
+                <td *ngIf="!beer.deal">
+                    <span *ngIf="!beer.deal">{{beer.price | currency}}</span>
+                </td>
+                <td *ngIf="beer.stock > 0">{{ beer.stock }}</td>
+                <td *ngIf="beer.stock === 0" class="badge text-bg-warning" style="color:black">SIN STOCK</td>
+                <td>
+                    <button class="btn btn-primary " (click)="upQuantity(beer)">+</button>
+                    {{ beer.quantity }}
+                    <button class="btn btn-primary " (click)="downQuantity(beer)">-</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
