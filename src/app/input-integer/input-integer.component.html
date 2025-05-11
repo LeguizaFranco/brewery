@@ -1,0 +1,21 @@
+<div class="d-flex flex-column align-items-start gap-2">
+
+    <div class="d-flex align-items-center gap-2">
+        <button class="btn btn-outline-primary btn-sm px-3" (click)="downQuantity()"
+            [disabled]="currentQuantity <= 0">−</button>
+
+        <span class="fs-5 fw-medium">{{ currentQuantity }}</span>
+
+        <button class="btn btn-outline-primary btn-sm px-3" (click)="upQuantity()"
+            [disabled]="currentQuantity >= maxQuantity">+</button>
+    </div>
+
+    <div *ngIf="currentQuantity === maxQuantity"
+        class="alert alert-warning d-flex align-items-center rounded shadow-sm mb-0" role="alert">
+        <i class="bi bi-exclamation-triangle-fill text-warning fs-5"></i>
+        <span class="text-dark">
+            Alcanzaste la cantidad máxima disponible.
+        </span>
+    </div>
+
+</div>

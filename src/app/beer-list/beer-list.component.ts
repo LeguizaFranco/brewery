@@ -13,7 +13,7 @@ export class BeerListComponent {
       name: "Dark Beer",
       type: "Dark",
       price: 80,
-      stock: 5,
+      stock: 10,
       image: 'img/porter.jpeg',
       deal: false,
       quantity: 0,
@@ -22,7 +22,7 @@ export class BeerListComponent {
       name: "Bilter Call Saul",
       type: "Ipa",
       price: 100,
-      stock: 3,
+      stock: 5,
       image: 'img/porter.jpeg',
       deal: true,
       quantity: 0,
@@ -39,11 +39,5 @@ export class BeerListComponent {
   ]
   constructor() { }
 
-  downQuantity(beer: Beers): void {
-    beer.quantity--;
-  }
 
-  upQuantity(beer: Beers): void {
-    beer.quantity++;
-  }
 }

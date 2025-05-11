@@ -27,12 +27,11 @@
                 <td *ngIf="!beer.deal">
                     <span *ngIf="!beer.deal">{{beer.price | currency}}</span>
                 </td>
-                <td *ngIf="beer.stock > 0">{{ beer.stock }}</td>
+                <td *ngIf="beer.stock">{{ beer.stock }}</td>
                 <td *ngIf="beer.stock === 0" class="badge text-bg-warning" style="color:black">SIN STOCK</td>
                 <td>
-                    <button class="btn btn-primary " (click)="upQuantity(beer)">+</button>
-                    {{ beer.quantity }}
-                    <button class="btn btn-primary " (click)="downQuantity(beer)">-</button>
+                    <app-input-integer [(quantity)]="beer.quantity" [maxQuantity]="beer.stock" *ngIf="beer.stock">
+                    </app-input-integer>
                 </td>
             </tr>
         </tbody>
