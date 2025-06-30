@@ -1,37 +1,46 @@
 <section>
-    <h1>Beer List</h1>
-    <table class="table">
+    <h1 class="mb-4 text-center">Lista de Cervezas</h1>
+    <table class="table align-middle">
         <thead>
-            <tr>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Type</th>
+            <tr class="text-center">
+                <th style="width: 110px;">Imagen</th>
+                <th>Nombre</th>
+                <th>Tipo</th>
                 <th>Precio</th>
-                <th>Stock</th>
-                <th>Quantity</th>
+                <th style="width: 80px;">Stock</th>
+                <th style="width: 120px;">Cantidad</th>
+                <th style="width: 110px;">Carrito</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let beer of beers">
+            <tr *ngFor="let beer of beers" class="align-middle text-center">
                 <td>
-                    <img class="img-thumbnail" [src]="beer.image" [alt]="beer.name" width="120" />
+                    <img class="img-thumbnail" [src]="beer.image" [alt]="beer.name" width="80" height="80"
+                        style="object-fit:cover;" />
                 </td>
-                <td>{{ beer.name }}
-                    <span *ngIf="beer.deal" class="badge sale-tag">SALE</span>
+                <td>
+                    <span class="fw-bold">{{ beer.name }}</span>
+                    <span *ngIf="beer.deal" class="badge bg-danger ms-2">SALE</span>
                 </td>
                 <td>{{ beer.type }}</td>
-                <td *ngIf="beer.deal">
-                    <span class="old-price">{{beer.price | currency}}</span>
-                    <span class="new-price">{{(beer.price * 0.8) | currency}}</span>
-                </td>
-                <td *ngIf="!beer.deal">
+                <td>
+                    <span *ngIf="beer.deal">
+                        <span class="text-decoration-line-through text-muted me-1">{{beer.price | currency}}</span>
+                        <span class="fw-bold text-success">{{(beer.price * 0.8) | currency}}</span>
+                    </span>
                     <span *ngIf="!beer.deal">{{beer.price | currency}}</span>
                 </td>
-                <td *ngIf="beer.stock">{{ beer.stock }}</td>
-                <td *ngIf="beer.stock === 0" class="badge text-bg-warning" style="color:black">SIN STOCK</td>
                 <td>
-                    <app-input-integer [(quantity)]="beer.quantity" [maxQuantity]="beer.stock" *ngIf="beer.stock">
-                    </app-input-integer>
+                    <span *ngIf="beer.stock > 0">{{ beer.stock }}</span>
+                    <span *ngIf="beer.stock === 0" class="badge bg-warning text-dark">SIN STOCK</span>
+                </td>
+                <td>
+                    <app-input-integer [(quantity)]="beer.quantity" [maxQuantity]="beer.stock"
+                        *ngIf="beer.stock > 0"></app-input-integer>
+                </td>
+                <td>
+                    <button class="btn btn-primary w-100" [disabled]="beer.stock === 0"
+                        (click)="addToCart(beer)">Comprar</button>
                 </td>
             </tr>
         </tbody>

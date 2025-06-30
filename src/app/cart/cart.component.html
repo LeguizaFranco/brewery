@@ -1,1 +1,22 @@
-<h1>Carrito de compras</h1>
+<h1 class="mb-4 text-center">Carrito de compras</h1>
+<ul class="list-group">
+    <li *ngFor="let beer of cartList"
+        class="list-group-item d-flex align-items-center justify-content-between flex-wrap">
+        <div class="d-flex align-items-center">
+            <img class="img-thumbnail me-3" [src]="beer.image" [alt]="beer.name" width="80" height="80"
+                style="object-fit:cover;" />
+            <div>
+                <div class="fw-bold">{{ beer.name }}</div>
+                <small class="text-muted">Cantidad: {{ beer.quantity }}</small>
+            </div>
+        </div>
+        <div class="text-end">
+            <span *ngIf="beer.deal" class="badge bg-success fs-6">
+                Oferta: {{ ((beer.price * 0.8) * beer.quantity) | currency }}
+            </span>
+            <span *ngIf="!beer.deal" class="badge bg-primary fs-6">
+                Precio: {{ (beer.price * beer.quantity) | currency }}
+            </span>
+        </div>
+    </li>
+</ul>
