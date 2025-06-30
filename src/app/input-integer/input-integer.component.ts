@@ -1,12 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-input-integer',
   standalone: false,
   templateUrl: './input-integer.component.html',
-  styleUrl: './input-integer.component.scss'
+  styleUrls: ['./input-integer.component.scss']
 })
-export class InputIntegerComponent implements OnInit {
+export class InputIntegerComponent implements OnInit, OnChanges {
   @Input() quantity: number = 0; // los input son los [input] de la vista
   @Input() maxQuantity: number = 0;
 
@@ -15,6 +15,13 @@ export class InputIntegerComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentQuantity = this.quantity;
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['quantity']) {
+      // Si el padre cambia el valor, actualiza el input interno
+      this.currentQuantity = changes['quantity'].currentValue;
+    }
   }
 
   currentQuantity: number = 0;
